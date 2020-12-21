@@ -1,6 +1,16 @@
 .adsList {
   width: 100%;
 
+  &__info {
+    border: 1px solid black;
+  }
+
+  &__infoContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+
   &__item {
     display: flex;
     list-style-type: none;

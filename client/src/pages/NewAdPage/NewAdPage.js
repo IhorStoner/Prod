@@ -5,6 +5,7 @@ import { Input, Dropdown,Form,TextArea,Button } from 'semantic-ui-react'
 import * as category from '../../assets/json/category.json'
 import * as cityData from '../../assets/json/russian-cities.json'
 import { useHistory } from 'react-router-dom'
+import config from '../../config/deafult.json'
 
 export default function NewAdPage() {
   //раздел
@@ -90,9 +91,23 @@ export default function NewAdPage() {
       mail: mail,
       status: status,
       services: serviceArr,
-      img: imgId,
+      img: [...imgId],
     })
+    console.log(images)
   }, [section,selectedSubsection,type,selectedRegion,city,price,title,description,name,phone,mail,status,serviceArr,productPrice,imgId])
+
+  const uploadImage = useCallback(async (e) => {
+    const imgArr = [...images]
+    e.preventDefault()
+
+    imgArr.forEach(async item => {
+      const formData = new FormData()
+      formData.append('image', item)
+      const result = await axios.post(`${config.serverUrl}/api/images`,formData)
+      .then(res => setImgId([...imgId, res.data[0]._id]))
+    })
+    console.log(result)
+  })
 
   const onChangeGold = () => {
 
@@ -140,14 +155,10 @@ export default function NewAdPage() {
   }
 
   const onSubmit = useCallback(async values => {
-    const formData = new FormData()
-    formData.append('image', images[0])
-    const result = await axios.post('http://localhost:5000/api/images',formData)
-      .then(res => console.log(res))
-      // .then(res => setImgId([...imgId, res.data[0]._id]))
-    const sendData = await axios.post('http://localhost:5000/api/ads',values)
+    
     console.log(values)
-    // history.push('/home')
+    const sendData = await axios.post(`${config.serverUrl}/api/ads`,values)
+    history.push('/home')
   }, [])
 
   return (
@@ -168,10 +179,10 @@ export default function NewAdPage() {
             <input type="file" onChange={(e) => setImages(e.target.files)} multiple/>
             {[...images].map((file, i) => (
               <div className='ad__imgContainer'>
-                {/* <span>it work</span> */}
                 <img src={URL.createObjectURL(file)} width='100' height='100'></img>
               </div>
             ))}
+            <Button onClick={(e) => uploadImage(e)}>Загрузить фото</Button>
           </div>
         </div>
         <div className="ad__content">

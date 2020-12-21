@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { fetchAds } from '../actions/adsAction';
+import { fetchAds,openInfo } from '../actions/adsAction';
 
 
 const initialState = {

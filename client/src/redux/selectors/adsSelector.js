@@ -7,15 +7,15 @@ export const getAds = createSelector(
 
 export const getGoldAds = createSelector(
   getAds,
-  ads => ads.filter(ad => ad.status === 'gold')
+  ads => ads.filter(ad => ad.status === 'gold').reverse()
 );
 
 export const getSilverAds = createSelector(
   getAds,
-  ads => ads.filter(ad => ad.status === 'silver')
+  ads => ads.filter(ad => ad.status === 'silver').reverse()
 );
 
 export const getCommonAds = createSelector(
   getAds,
-  ads => ads.filter(ad => ad.status === 'common')
+  ads => ads.filter(ad => ad.status === 'common').reverse()
 );

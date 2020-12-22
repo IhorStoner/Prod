@@ -40,7 +40,7 @@ export default function AdsList() {
               </div>
               <div className="adsList__photoContainer">
                 <h3>Фото:</h3>
-                 <SliderImg >
+                 <SliderImg className='slider'>
                   {ad.img.map(img => (
                     <img src={`${config.serverUrl}/api/images/${img}`} width='500' height='500' />
                   ))}

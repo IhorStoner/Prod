@@ -33,7 +33,7 @@ app.use((err, req, res, next) => {
     .send({ error: err.message })
 });
 
-const PORT = config.get('port') || 5000
+const PORT = process.env.PORT|| config.get('port') || 5000
 
 async function start () {
   try {

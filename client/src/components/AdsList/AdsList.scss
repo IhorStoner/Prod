@@ -6,8 +6,6 @@
   }
 
   &__infoContainer {
-    display: flex;
-    justify-content: space-between;
     margin-bottom: 20px;
     min-height: 200px;
   }
@@ -34,9 +32,4 @@
 
 .silver {
   background-color: silver;
-}
-
-.slider { 
-  min-height: 200px;
-  min-width: 200px;
 }

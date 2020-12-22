@@ -6,7 +6,9 @@ import { getAds, getGoldAds, getSilverAds, getCommonAds } from '../../redux/sele
 import './AdsList.scss'
 import config from '../../config/deafult.json'
 import logo from '../../assets/png/logo.png'
-import SliderImg from '../SliderImg/SliderImg'
+import {SliderImg} from '../SliderImg/SliderImg'
+import { Slide } from 'react-slideshow-image'
+import 'react-slideshow-image/dist/styles.css'
 
 export default function AdsList() {
   const dispatch = useDispatch();
@@ -40,11 +42,18 @@ export default function AdsList() {
               </div>
               <div className="adsList__photoContainer">
                 <h3>Фото:</h3>
-                 <SliderImg className='slider'>
-                  {ad.img.map(img => (
-                    <img src={`${config.serverUrl}/api/images/${img}`} width='500' height='500' />
-                  ))}
-                </SliderImg>
+                <div className="slide-container">
+                  <Slide className='slider'>
+                    {ad.img.map(img => (
+                      // <img src={`${config.serverUrl}/api/images/${img}`} width='500' height='500' />
+                      <div className="each-fade">
+                        <div className="image-container">
+                          <img src={`${config.serverUrl}/api/images/${img}`} width='500' height='500' />
+                        </div>
+                      </div>
+                    ))}
+                  </Slide>
+                </div>
               </div>
             </div>
             <div className="adsList__infoContainer">

@@ -1,23 +1,38 @@
-import React, { Component } from "react";
-import AwesomeSlider from 'react-awesome-slider';
-import AwsSliderStyles from 'react-awesome-slider/src/styles.scss';
+import React, { Component } from 'react';
+import { Slide } from 'react-slideshow-image'
+import 'react-slideshow-image/dist/styles.css'
 
-export default class SliderImg extends Component {
-  render() {
-    const settings = {
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-    const images = this.props.children
+const slideImages = [
+  'images/slide_2.jpg',
+  'images/slide_3.jpg',
+  'images/slide_4.jpg'
+];
 
-    return (
-      <div>
-        <Slider {...settings}>
-          {images.map(item => <img src={item.props.src} height='200' width='200'></img>)}
-        </Slider>
-      </div>
-    );
-  }
+export const SliderImg = (props) => {
+  const slideImages = props.children
+  
+  return (
+    <div className="slide-container">
+      <Slide>
+        {slideImages.map(item => (
+          <div className="each-slide">
+            <div style={{ 'backgroundImage': `url(${slideImages[0]})` }}>
+              <span>Slide 1</span>
+            </div>
+          </div>
+        ))}
+
+        <div className="each-slide">
+          <div style={{ 'backgroundImage': `url(${slideImages[1]})` }}>
+            <span>Slide 2</span>
+          </div>
+        </div>
+        <div className="each-slide">
+          <div style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
+            <span>Slide 3</span>
+          </div>
+        </div>
+      </Slide>
+    </div>
+  )
 }
